@@ -1,0 +1,15 @@
+{
+  "name": "neato-emoji-converter",
+  "version": "1.0.0",
+  "description": "Convert unicode emoji, shortcodes and custom emoji",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Drew Harwell",
+  "license": "MIT",
+  "dependencies": {
+    "emoji-toolkit": "^5.0.4",
+    "lodash": "^4.17.15"
+  }
+}

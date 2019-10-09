@@ -48,31 +48,25 @@ This is the default source of emojis, it allows the converter to find all offici
 
 ### `Converter.unicodeToPointsString(unicodeStr)`
 
-converts, for example,  `'🙆🏿‍♂️'` to `'1f646-1f3ff-2642'`
+converts, for example,  `'🙆🏿‍♂️'` to `'1f646-1f3ff-200d-2642-fe0f'`
 
 # Examples
 
 ## Shortcodes to Unicode
 
 ```js
-let EmojiConverter = require('neato-emoji-converter')
-
-var converter = new EmojiConverter()
 converter.replaceShortcodes('I:heart:NY')
-// => "I❤NY"
+// => 'I❤️NY'
 ```
 
 ## Unicode to shortcodes
 ```js
-var converter = new EmojiConverter()
-converter.replaceUnicode("❤~~🐧~~❤")
+converter.replaceUnicode("❤️~~🐧~~❤️")
 // => ":heart:~~:penguin:~~:heart:"
 ```
 
 ## Custom HTML rendering of official Emoji
 ```js
-var converter = new EmojiConverter()
-
 var str = ':heart: its me, 🦃!'
 
 function renderEmojiHowIWant(unicodeChar, shortcode, name){
@@ -81,7 +75,7 @@ function renderEmojiHowIWant(unicodeChar, shortcode, name){
 }
 
 var htmlified = converter.replaceUnicodeWith(str,renderEmojiHowIWant)
-// => '<img alt="red heart" src="emojis/folder/2764.png"></img> its me, <img alt="turkey" src="emojis/folder/1f983.png"></img>!'
+// => '<img alt="red heart" src="emojis/folder/2764-fe0f.png"></img> its me, <img alt="turkey" src="emojis/folder/1f983.png"></img>!'
 ```
 
 ## Advanced: add custom Emoji as `<img>` tags, convert other shortcodes to unicode
@@ -90,27 +84,31 @@ var emojiData = [
   { shortname: ':charizard:', url: "http://somewhere.com/charizard.png" }
 ]
 var converter = new EmojiConverter([Converter.EMOJI_DEFAULT_SOURCE, emojiData])
-var chatText = ':charizard: ❤ :pancakes: :wow:'
+var chatText = ':charizard: ❤️ :pancakes: :wow:'
 var pokemanned = converter.replaceShortcodesWith(chatText, function(unicodeChar, shortcode, name, object){
    if (unicodeChar){return unicodeChar}
    else if (object.url){return `<img src="${object.url}" alt="${name}" title="${name}"/>`}
    else{ return shortcode }
 })
-// =>'<img src="http://somewhere.com/charizard.png" alt="charizard" title="charizard"/> ❤ 🥞 :wow:'
+// =>'<img src="http://somewhere.com/charizard.png" alt="charizard" title="charizard"/> ❤️ 🥞 :wow:'
 ```
 
 ## Advanced: plain-text replacement
 ```js
 var replacements = [
-  { shortname: ":heart:", unicode: '❤', terminalReplacement: '<3'},
-  { shortname: ":happy:", unicode: '😊', terminalReplacement: ':)'}
+    { shortname: ":heart:", unicode: '❤', terminalReplacement: '<3'},
+    { shortname: ":heart:", unicode: '❤️', terminalReplacement: '<3'},
+    { shortname: ":blush:", unicode: '😊', terminalReplacement: '^__^'},
+    { shortname: ":simple_smile:", unicode: '🙂', terminalReplacement: ':)'},
+    { shortname: ":smiley:", unicode: '😃', terminalReplacement: ':D'},
+    {shortname: ':laughing:', unicode: '😆', terminalReplacement: 'XD'}
 ]
-var converter = new EmojiConverter([Converter.EMOJI_DEFAULT_SOURCE, replacements])
+var converter = new Converter([Converter.EMOJI_DEFAULT_SOURCE, replacements])
 
-var chatText = 'I ❤ Unicode, but I also :heart: short codes 😊! (and 🎂)'
+var chatText = 'I ❤ ❤️ Unicode 🙂, but I also :heart: short codes 😊! (and 🍬 😆)'
 
 converter.replaceWith(chatText, function(unicodeChar, shortcode, name, object){
-  return object.terminalReplacement || shortcode
+    return object.terminalReplacement || shortcode || unicodeChar
 })
-// => 'I <3 Unicode, but I also <3 short codes :)! (and :birthday:)'
+// => 'I <3 <3 Unicode :), but I also <3 short codes ^__^! (and :candy: XD)'
 ```

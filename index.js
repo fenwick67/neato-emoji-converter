@@ -58,20 +58,20 @@ class EmojiConverter{
       Object.keys(source).forEach(sequence=>{
 
         var entry = source[sequence]
-        var unicode = EmojiConverter.pointsStringToUnicode(sequence)
-
+        var unicode = EmojiConverter.pointsStringToUnicode(entry['unicode_output'])
+           
         var shortname = entry.shortname;
         var shortnames = [shortname, ...entry.shortname_alternates]
 
         shortnames.forEach(s=>{
-          this.emojiMap[s] = unicode
-          this.aliasMap[s] = shortname
+          this.emojiMap[s.toLowerCase()] = unicode
+          this.aliasMap[s.toLowerCase()] = shortname
         })
 
         this.shortcodeMap[unicode] = shortname
         this.nameMap[shortname] = entry.name || shortname.replace(/\:/g,'')
         this.objectMap[shortname] = entry
-                
+
       })
     })
 

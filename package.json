@@ -1,6 +1,6 @@
 {
   "name": "neato-emoji-converter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Convert unicode emoji, shortcodes and custom emoji",
   "main": "index.js",
   "scripts": {

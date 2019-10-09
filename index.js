@@ -1,5 +1,4 @@
-var _ = require('lodash')
-
+var _ = {toArray: require('lodash.toarray')}
 
 class EmojiConverter{
 

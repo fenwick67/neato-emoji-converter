@@ -6,17 +6,17 @@ var con = new Converter()
 // test conversion
 assert.equal(con.replaceUnicode('❤'), ':heart:')
 
-assert.equal(con.replaceShortCodes(':heart:'), '❤')
+assert.equal(con.replaceShortcodes(':heart:'), '❤')
 
-assert.equal( con.replaceShortCodes(':cross:'), '✝')
+assert.equal( con.replaceShortcodes(':cross:'), '✝')
 
-assert.equal( con.replaceShortCodes(':latin_cross:'), '✝')
+assert.equal( con.replaceShortcodes(':latin_cross:'), '✝')
 
-assert.equal( con.normalizeShortCodes(':latin_cross:'), ':cross:')
+assert.equal( con.normalizeShortcodes(':latin_cross:'), ':cross:')
 
-assert.equal(con.replaceShortCodes('I:HEART:NY'),'I❤NY')
+assert.equal(con.replaceShortcodes('I:HEART:NY'),'I❤NY')
 
-assert.equal(con.replaceShortCodes('I:fizzgig:NY'),'I:fizzgig:NY')
+assert.equal(con.replaceShortcodes('I:fizzgig:NY'),'I:fizzgig:NY')
 
 assert.equal(con.replaceUnicode('❤<= thats a heart'), ':heart:<= thats a heart')
 
@@ -33,16 +33,16 @@ const shortcodeStr = con.replaceUnicode(testStr)
 const mixedStr = testStr + shortcodeStr;
 
 // ensure reversible (assuming preferred shortcode is used)
-assert.equal(con.replaceShortCodes(con.replaceUnicode(testStr)), testStr)
-assert.equal(con.replaceUnicode(con.replaceShortCodes(shortcodeStr)), shortcodeStr)
+assert.equal(con.replaceShortcodes(con.replaceUnicode(testStr)), testStr)
+assert.equal(con.replaceUnicode(con.replaceShortcodes(shortcodeStr)), shortcodeStr)
 
 // convert to points string
-var dude = con.replaceShortCodes(':man_gesturing_ok_tone5:')
+var dude = con.replaceShortcodes(':man_gesturing_ok_tone5:')
 assert.equal(Converter.unicodeToPointsString(dude),'1f646-1f3ff-2642')
 
 //////////////////////////////////// affirm demos work correctly
 var converter = new Converter()
-assert.equal(converter.replaceShortCodes('I:heart:NY'), 'I❤NY')
+assert.equal(converter.replaceShortcodes('I:heart:NY'), 'I❤NY')
 
 var converter = new Converter()
 assert.equal(converter.replaceUnicode("❤~~🐧~~❤"), ":heart:~~:penguin:~~:heart:")
@@ -50,7 +50,7 @@ assert.equal(converter.replaceUnicode("❤~~🐧~~❤"), ":heart:~~:penguin:~~:h
 // custom HTML rendering
 var converter = new Converter()
 var str = ':heart: its me, 🦃!'
-function renderEmojiHowIWant(unicodeChar, shortCode, name){
+function renderEmojiHowIWant(unicodeChar, shortcode, name){
   var codepointString = Converter.unicodeToPointsString(unicodeChar)
   return `<img alt="${name}" src="emojis/folder/${codepointString}.png"></img>`
 }
@@ -63,10 +63,10 @@ var emojiData = [
 ]
 var converter = new Converter([Converter.EMOJI_DEFAULT_SOURCE, emojiData])
 var chatText = ':charizard: ❤ :pancakes: :wow:'
-var pokemanned = converter.replaceShortcodesWith(chatText, function(unicodeChar, shortCode, name, object){
+var pokemanned = converter.replaceShortcodesWith(chatText, function(unicodeChar, shortcode, name, object){
     if (unicodeChar){return unicodeChar}
     else if (object.url){return `<img src="${object.url}" alt="${name}" title="${name}"/>`}
-    else{ return shortCode }
+    else{ return shortcode }
 })
 assert.equal(pokemanned, '<img src="http://somewhere.com/charizard.png" alt="charizard" title="charizard"/> ❤ 🥞 :wow:')
 
@@ -79,8 +79,8 @@ var converter = new Converter([Converter.EMOJI_DEFAULT_SOURCE, replacements])
 
 var chatText = 'I ❤ Unicode, but I also :heart: short codes 😊! (and 🎂)'
 
-var terminalSafe = converter.replaceWith(chatText, function(unicodeChar, shortCode, name, object){
-    return object.terminalReplacement || shortCode || unicodeChar
+var terminalSafe = converter.replaceWith(chatText, function(unicodeChar, shortcode, name, object){
+    return object.terminalReplacement || shortcode || unicodeChar
 })
 assert.equal(terminalSafe, 'I <3 Unicode, but I also <3 short codes :)! (and :birthday:)')
 
@@ -94,7 +94,7 @@ console.timeEnd('shortcode=>unicode x1000')
 
 console.time('unicode=>shortcode x1000')
 for (var i = 0; i < 1000; i++){
-    con.replaceShortCodes(mixedStr)
+    con.replaceShortcodes(mixedStr)
 }
 console.timeEnd('unicode=>shortcode x1000')
 
@@ -117,7 +117,7 @@ console.timeEnd("custom replacer (unicode only) x1000")
 
 console.time("custom replacer (shortcode only) x1000")
 for (var i = 0; i < 1000; i++){
-    con.replaceShortCodesWith(mixedStr, customReplacer)
+    con.replaceShortcodesWith(mixedStr, customReplacer)
 }
 console.timeEnd("custom replacer (shortcode only) x1000")
 

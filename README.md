@@ -18,11 +18,11 @@ A source should be an array of objects, each object representing an emoji. Each 
 
 Replace unicode emoji in a string with `:shortcode:`s.
 
-### `converterInstance.replaceShortCodes(str)`
+### `converterInstance.replaceShortcodes(str)`
 
 replace `:shortcode:`s with unicode emojis in a string
 
-### `converterInstance.replaceShortCodesWith(str, replacer)`
+### `converterInstance.replaceShortcodesWith(str, replacer)`
 
 Every `:shortcode:` emoji that you have defined in your sources will be replaced with the function you specify.
 
@@ -30,11 +30,11 @@ The function is called with `(unicodeCharacter, shortcode, emojiName, emojiObjec
 
 ### `converterInstance.replaceUnicodeWith(str, replacer)`
 
-Same as `replaceShortCodesWith`, but operates only on unicode emojis that are recognized..
+Same as `replaceShortcodesWith`, but operates only on unicode emojis that are recognized..
 
 ### `converterInstance.replaceWith(str, replacer)`
 
-Same as `replaceShortCodesWith`, but operates on short code and unicode emojis that are recognized.
+Same as `replaceShortcodesWith`, but operates on short code and unicode emojis that are recognized.
 
 ### `converterInstance.normalizeShortcodes(str)`
 
@@ -58,7 +58,7 @@ converts, for example,  `'🙆🏿‍♂️'` to `'1f646-1f3ff-2642'`
 let EmojiConverter = require('neato-emoji-converter')
 
 var converter = new EmojiConverter()
-converter.replaceShortCodes('I:heart:NY')
+converter.replaceShortcodes('I:heart:NY')
 // => "I❤NY"
 ```
 
@@ -75,7 +75,7 @@ var converter = new EmojiConverter()
 
 var str = ':heart: its me, 🦃!'
 
-function renderEmojiHowIWant(unicodeChar, shortCode, name){
+function renderEmojiHowIWant(unicodeChar, shortcode, name){
   var codepointString = Converter.unicodeToPointsString(unicodeChar)
   return `<img alt="${name}" src="emojis/folder/${codepointString}.png"></img>`
 }
@@ -91,10 +91,10 @@ var emojiData = [
 ]
 var converter = new EmojiConverter([Converter.EMOJI_DEFAULT_SOURCE, emojiData])
 var chatText = ':charizard: ❤ :pancakes: :wow:'
-var pokemanned = converter.replaceShortcodesWith(chatText, function(unicodeChar, shortCode, name, object){
+var pokemanned = converter.replaceShortcodesWith(chatText, function(unicodeChar, shortcode, name, object){
    if (unicodeChar){return unicodeChar}
    else if (object.url){return `<img src="${object.url}" alt="${name}" title="${name}"/>`}
-   else{ return shortCode }
+   else{ return shortcode }
 })
 // =>'<img src="http://somewhere.com/charizard.png" alt="charizard" title="charizard"/> ❤ 🥞 :wow:'
 ```
@@ -109,8 +109,8 @@ var converter = new EmojiConverter([Converter.EMOJI_DEFAULT_SOURCE, replacements
 
 var chatText = 'I ❤ Unicode, but I also :heart: short codes 😊! (and 🎂)'
 
-converter.replaceWith(chatText, function(unicodeChar, shortCode, name, object){
-  return object.terminalReplacement || shortCode
+converter.replaceWith(chatText, function(unicodeChar, shortcode, name, object){
+  return object.terminalReplacement || shortcode
 })
 // => 'I <3 Unicode, but I also <3 short codes :)! (and :birthday:)'
 ```

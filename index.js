@@ -106,7 +106,7 @@ class EmojiConverter{
    * @param {function} replacer the replacer function
    * @returns {string} the resultant string
    */
-  replaceShortCodesWith(str, replacer){
+  replaceShortcodesWith(str, replacer){
     return str.replace(EmojiConverter.SHORTCODE_REGEX, (match)=>{
       var short = match.toLowerCase()
       var uni = this.emojiMap[short]||''
@@ -144,7 +144,7 @@ class EmojiConverter{
    * @param {function} replacer the replacer function
    * @returns {string} the resultant string
    */
-  replaceShortCodes(str){
+  replaceShortcodes(str){
     return str.replace(EmojiConverter.SHORTCODE_REGEX, (match)=>{
       return this.emojiMap[match.toLowerCase()] || match
     })
@@ -155,25 +155,10 @@ class EmojiConverter{
    * @param {string} str the string to operate on
    * @returns {string} the resultant string
    */
-  normalizeShortCodes(str){
+  normalizeShortcodes(str){
     return str.replace(EmojiConverter.SHORTCODE_REGEX, (match)=>{
       return this.aliasMap[match.toLowerCase()] || match
     })
-  }
-
-
-  // method aliases
-  replaceShortcodes(...args){
-    return this.replaceShortCodes(...args)
-  }
-  replaceShortcodesWith(...args){
-    return this.replaceShortCodesWith(...args)
-  }
-  normalizeShortcodes(...args){
-    return this.normalizeShortCodes(...args)
-  }
-  replaceAllWith(...args){
-    return this.replaceWith(...args)
   }
 
 }

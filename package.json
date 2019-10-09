@@ -1,6 +1,6 @@
 {
   "name": "neato-emoji-converter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Convert unicode emoji, shortcodes and custom emoji",
   "main": "index.js",
   "scripts": {
@@ -11,5 +11,9 @@
   "dependencies": {
     "emoji-toolkit": "^5.0.4",
     "lodash": "^4.17.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fenwick67/neato-emoji-converter.git"
   }
 }

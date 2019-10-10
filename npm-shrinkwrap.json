@@ -1,13 +1,13 @@
 {
   "name": "neato-emoji-converter",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
     "emoji-toolkit": {
-      "version": "5.0.4",
-      "resolved": "https://registry.npmjs.org/emoji-toolkit/-/emoji-toolkit-5.0.4.tgz",
-      "integrity": "sha512-ZZfVQkWQ+1v3q3EdeYSVOQHVg/idvOhARoG4G+hPesN1i00vSeSgI+PUrsRRQSdrET7/Fe9Jr0n7iFbLlY5dKA=="
+      "version": "5.0.5",
+      "resolved": "https://registry.npmjs.org/emoji-toolkit/-/emoji-toolkit-5.0.5.tgz",
+      "integrity": "sha512-I57/yzEll8mIczqUCv2DaBhF61eBKtOwUN/7bxFPjwtwoVB9FnkRoabQRLZS6+KeSZNscw0av8o/N7tfy59PUg=="
     },
     "lodash.toarray": {
       "version": "4.4.0",

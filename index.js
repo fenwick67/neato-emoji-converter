@@ -3,7 +3,7 @@ var _ = {toArray: require('lodash.toarray')}
 class EmojiConverter{
 
   /**
-  * An emoji converter instance
+  * Create an emoji converter instance
   * 
   * @constructor
   * @param sources an array of emoji sources. Default is `[EmojiConverter.EMOJI_DEFAULT_SOURCE]`

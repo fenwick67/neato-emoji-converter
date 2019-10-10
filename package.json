@@ -9,8 +9,11 @@
   "author": "Drew Harwell",
   "license": "MIT",
   "dependencies": {
-    "emoji-toolkit": "^5.0.4",
+    "emoji-toolkit": "^5.0.5",
     "lodash.toarray": "^4.4.0"
+  },
+  "engines": {
+    "node": ">5.0.0"
   },
   "repository": {
     "type": "git",
